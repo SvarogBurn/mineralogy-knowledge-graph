@@ -5,11 +5,11 @@ An OWL ontology modeling minerals, their physical/chemical properties, and the d
 ## Class hierarchy
 
 Minerals are classified first by chemical composition. Silicates form the largest branch and split further into tectosilicates, nesosilicates, and phyllosilicates; oxides, sulfides, sulfates, carbonates, halides, phosphates, and native elements make up the rest of the top level. Alongside `Mineral` sit the controlled-vocabulary classes (`CrystalSystem`, `ColorCategory`, `LusterType`, `CleavageType`) and the geography/geology branch (`Deposit`, `Locality`, `GeographicArea`, `RockType`).
-
-<img width="436" height="1114" alt="image" src="https://github.com/user-attachments/assets/7d97906c-30a7-4486-8290-daee3aea41cd" />
+<img src="images/class-hierarchy.png" alt="Protégé class hierarchy tree" width="420">
 
 The same structure, viewed as a graph of the top-level classes and how they connect to `Mineral`:
-<img width="1850" height="978" alt="image" src="https://github.com/user-attachments/assets/55722e55-fe7f-49a0-acf7-6a655345df32" />
+
+<img src="images/top-level-classes-graph.png" alt="OntoGraf view of top-level classes" width="600">
 
 <details>
 <summary>Full class table (33 classes)</summary>
@@ -66,7 +66,7 @@ Composition links a mineral to its constituent chemical elements. Geography chai
 
 The iron branch shows this in practice: four minerals connect to the element `Iron`, each through `composedOfElement`.
 
-<img width="1018" height="592" alt="image" src="https://github.com/user-attachments/assets/9ca4f1a8-1614-4916-893b-00ca0248bcd6" />
+<img src="images/iron-relationships-ontograf.png" alt="OntoGraf view of minerals connected to Iron" width="480">
 
 
 <details>
@@ -126,7 +126,8 @@ The iron branch shows this in practice: four minerals connect to the element `Ir
 
 Consistency was checked in Protégé with the HermiT reasoner, and it didn't pass on the first attempt. An earlier version declared `Mineral` as a disjoint union that included several sibling top-level classes, which collapsed the whole ontology (`owl:Thing` became a subclass of `owl:Nothing`). Protégé's explanation feature traced the failure back to that one axiom. Once removed, the reasoner ran clean, with no unsatisfiable classes:
 
-<img width="2620" height="948" alt="image" src="https://github.com/user-attachments/assets/29989c1e-5e45-4c67-bce3-6bf7d6b59735" />
+<img src="images/hermit-reasoner-log.png" alt="HermiT reasoner log showing a clean run" width="600">
+
 
 
 ## SPARQL queries
@@ -143,8 +144,7 @@ SELECT ?name ?formula ?hardness WHERE {
 }
 ```
 
-<img width="1196" height="1018" alt="image" src="https://github.com/user-attachments/assets/04514c53-c694-4cf1-8b49-ca849c6cc3f2" />
-
+<img src="images/query-basic-minerals.png" alt="GraphDB result: mineral name, formula, hardness" width="420">
 
 The most interesting one is the last, since it recovers a fact that was never stated directly:
 
@@ -155,8 +155,7 @@ SELECT ?area WHERE {
   ?area :locatedIn+ :Brazil .
 }
 ```
-
-<img width="1196" height="252" alt="image" src="https://github.com/user-attachments/assets/4196ad27-938d-4178-9548-7f976bf08b6a" />
+<img src="images/query-transitive-brazil.png" alt="GraphDB result: everything located in Brazil, found transitively" width="420">
 
 
 A mine and a locality both show up here, not because either is linked to Brazil directly, but because each is linked to a region that is.
