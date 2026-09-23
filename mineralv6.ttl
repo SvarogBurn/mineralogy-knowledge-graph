@@ -1,0 +1,1076 @@
+@prefix : <http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/> .
+
+<http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/coOccursWith
+:coOccursWith rdf:type owl:ObjectProperty ,
+                       owl:SymmetricProperty ;
+              rdfs:domain :Mineral ;
+              rdfs:range :Mineral ;
+              rdfs:comment "Relates two minerals that are commonly found together (paragenesis); symmetric."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/composedOfElement
+:composedOfElement rdf:type owl:ObjectProperty ;
+                   rdfs:domain :Mineral ;
+                   rdfs:range :ChemicalElement ;
+                   rdfs:comment "Links a mineral to a chemical element that is part of its composition."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/foundAtLocation
+:foundAtLocation rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Deposit ;
+                 rdfs:range :Locality ;
+                 rdfs:comment "Links a deposit to the locality where it is physically situated."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/hasCleavageType
+:hasCleavageType rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Mineral ;
+                 rdfs:range :CleavageType ;
+                 rdfs:comment "Assigns a mineral a category describing the quality of its cleavage."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/hasColorCategory
+:hasColorCategory rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Mineral ;
+                  rdfs:range :ColorCategory ;
+                  rdfs:comment "Assigns a mineral a controlled category describing its observed color."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/hasCrystalSystem
+:hasCrystalSystem rdf:type owl:ObjectProperty ,
+                           owl:FunctionalProperty ;
+                  rdfs:domain :Mineral ;
+                  rdfs:range :CrystalSystem ;
+                  rdfs:comment "Assigns a mineral its single crystal system; functional, since a mineral species has exactly one."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/hasGangueMineral
+:hasGangueMineral rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :hasMineral ;
+                  rdfs:domain :Deposit ;
+                  rdfs:range :Mineral ;
+                  rdfs:comment "Links a deposit to an accompanying non-valuable (gangue) mineral."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/hasLuster
+:hasLuster rdf:type owl:ObjectProperty ;
+           rdfs:domain :Mineral ;
+           rdfs:range :LusterType ;
+           rdfs:comment "Assigns a mineral a category describing how its surface reflects light."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/hasMineral
+:hasMineral rdf:type owl:ObjectProperty ;
+            owl:inverseOf :occursInDeposit ;
+            rdfs:domain :Deposit ;
+            rdfs:range :Mineral ;
+            rdfs:comment "Links a deposit to a mineral that it contains."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/hasOreMineral
+:hasOreMineral rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :hasMineral ;
+               rdfs:domain :Deposit ;
+               rdfs:range :Mineral ;
+               rdfs:comment "Links a deposit to its economically valuable (ore) mineral."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/hasTypeLocality
+:hasTypeLocality rdf:type owl:ObjectProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:domain :Mineral ;
+                 rdfs:range :Locality ;
+                 rdfs:comment "Links a mineral to the locality where it was first scientifically described; functional, since there is only one."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/hostedByRock
+:hostedByRock rdf:type owl:ObjectProperty ;
+              rdfs:domain :Deposit ;
+              rdfs:range :RockType ;
+              rdfs:comment "Links a deposit to the type of rock that hosts it."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/locatedIn
+:locatedIn rdf:type owl:ObjectProperty ,
+                    owl:TransitiveProperty ;
+           rdfs:range :GeographicArea ;
+           rdfs:comment "Places a locality or region inside a larger geographic area; transitive, so containment chains up to the country."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/mineralOccursInCountry
+:mineralOccursInCountry rdf:type owl:ObjectProperty ;
+                        rdfs:domain :Mineral ;
+                        rdfs:range :Country ;
+                        rdfs:comment "Links a mineral to the country where it occurs."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/occursInDeposit
+:occursInDeposit rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Mineral ;
+                 rdfs:range :Deposit ;
+                 rdfs:comment "Links a mineral to a deposit in which it naturally occurs."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/polymorphOf
+:polymorphOf rdf:type owl:ObjectProperty ,
+                      owl:SymmetricProperty ;
+             rdfs:domain :Mineral ;
+             rdfs:range :Mineral ;
+             rdfs:comment "Relates two minerals with the same composition but different crystal structure, such as diamond and graphite; symmetric."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/varietyOf
+:varietyOf rdf:type owl:ObjectProperty ,
+                    owl:TransitiveProperty ;
+           rdfs:domain :Mineral ;
+           rdfs:range :Mineral ;
+           rdfs:comment "Relates a mineral variety to its parent species, such as amethyst to quartz; transitive."@en .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/atomicNumber
+:atomicNumber rdf:type owl:DatatypeProperty ;
+              rdfs:domain :ChemicalElement ;
+              rdfs:range xsd:integer ;
+              rdfs:comment "The atomic number (Z) of the chemical element."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/chemicalFormula
+:chemicalFormula rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Mineral ;
+                 rdfs:range xsd:string ;
+                 rdfs:comment "The chemical formula of the mineral written as text."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/density
+:density rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Mineral ;
+         rdfs:range xsd:decimal ;
+         rdfs:comment "The density of the mineral in grams per cubic centimetre (g/cm3)."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/depositName
+:depositName rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Deposit ;
+             rdfs:range xsd:string ;
+             rdfs:comment "The descriptive name of the deposit."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/discoveryYear
+:discoveryYear rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Mineral ;
+               rdfs:range xsd:integer ;
+               rdfs:comment "The year (CE) in which the mineral was first scientifically described."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/elementSymbol
+:elementSymbol rdf:type owl:DatatypeProperty ;
+               rdfs:domain :ChemicalElement ;
+               rdfs:range xsd:string ;
+               rdfs:comment "The periodic-table symbol of the chemical element."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/formationAgeMa
+:formationAgeMa rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Deposit ;
+                rdfs:range xsd:decimal ;
+                rdfs:comment "The age of the deposit in millions of years (Ma)."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/imaSymbol
+:imaSymbol rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Mineral ;
+           rdfs:range xsd:string ;
+           rdfs:comment "The official IMA-CNMNC abbreviation for the mineral."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/latitude
+:latitude rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Locality ;
+          rdfs:range xsd:decimal ;
+          rdfs:comment "The latitude of the locality in decimal degrees."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/longitude
+:longitude rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Locality ;
+           rdfs:range xsd:decimal ;
+           rdfs:comment "The longitude of the locality in decimal degrees."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/mineralName
+:mineralName rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Mineral ;
+             rdfs:range xsd:string ;
+             rdfs:comment "The primary name of the mineral species."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/mohsHardness
+:mohsHardness rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Mineral ;
+              rdfs:range xsd:decimal ;
+              rdfs:comment "The hardness of the mineral on the Mohs scale from 1 to 10 (dimensionless)."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/oreGrade
+:oreGrade rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Deposit ;
+          rdfs:range xsd:decimal ;
+          rdfs:comment "The concentration of the valuable metal in an ore deposit, expressed as a percentage."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/spaceGroup
+:spaceGroup rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Mineral ;
+            rdfs:range xsd:string ;
+            rdfs:comment "The crystallographic space group of the mineral."@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Carbonate
+:Carbonate rdf:type owl:Class ;
+           rdfs:subClassOf :Mineral ;
+           rdfs:comment "A mineral built on the carbonate (CO3) anion group, such as calcite."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/ChemicalElement
+:ChemicalElement rdf:type owl:Class ;
+                 rdfs:comment "A chemical element from the periodic table that serves as a building block of minerals."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/CleavageType
+:CleavageType rdf:type owl:Class ;
+              rdfs:comment "A category describing the quality of a mineral's tendency to break along flat planes."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/ColorCategory
+:ColorCategory rdf:type owl:Class ;
+               rdfs:comment "A controlled category describing the observed color of a mineral."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Country
+:Country rdf:type owl:Class ;
+         rdfs:subClassOf :GeographicArea ;
+         owl:disjointWith :Region ;
+         rdfs:comment "A sovereign state; the highest-level geographic unit in the model."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/CrystalSystem
+:CrystalSystem rdf:type owl:Class ;
+               rdfs:comment "One of the seven categories describing the symmetry of a mineral's crystal structure."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Deposit
+:Deposit rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/GeographicArea
+:GeographicArea rdf:type owl:Class ;
+                rdfs:comment "A geographic or administrative area used to locate deposits and localities."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Halide
+:Halide rdf:type owl:Class ;
+        rdfs:subClassOf :Mineral ;
+        rdfs:comment "A mineral composed of a metal combined with a halogen element, such as halite or fluorite."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/HydrothermalDeposit
+:HydrothermalDeposit rdf:type owl:Class ;
+                     rdfs:subClassOf :Deposit ;
+                     rdfs:comment "A deposit formed by mineral precipitation from hot, mineral-rich water circulating through rock."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/IgneousRock
+:IgneousRock rdf:type owl:Class ;
+             rdfs:subClassOf :RockType ;
+             rdfs:comment "A rock formed from cooled and solidified magma or lava."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Locality
+:Locality rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/LusterType
+:LusterType rdf:type owl:Class ;
+            rdfs:comment "A category describing how a mineral's surface reflects light, such as metallic or vitreous."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/MagmaticDeposit
+:MagmaticDeposit rdf:type owl:Class ;
+                 rdfs:subClassOf :Deposit ;
+                 rdfs:comment "A deposit formed by the crystallization of minerals directly from cooling magma."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/MetamorphicDeposit
+:MetamorphicDeposit rdf:type owl:Class ;
+                    rdfs:subClassOf :Deposit ;
+                    rdfs:comment "A deposit formed when heat and pressure alter existing rock and its mineral content."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/MetamorphicRock
+:MetamorphicRock rdf:type owl:Class ;
+                 rdfs:subClassOf :RockType ;
+                 rdfs:comment "A rock formed by the transformation of existing rock under heat and pressure."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Mine
+:Mine rdf:type owl:Class ;
+      rdfs:subClassOf :Locality ;
+      rdfs:comment "A locality where minerals are extracted from underground or open workings."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Mineral
+:Mineral rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/NativeElement
+:NativeElement rdf:type owl:Class ;
+               rdfs:subClassOf :Mineral ;
+               rdfs:comment "A mineral composed of a single chemical element in uncombined (native) form, such as diamond or gold."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Nesosilicate
+:Nesosilicate rdf:type owl:Class ;
+              rdfs:subClassOf :Silicate ;
+              rdfs:comment "A silicate whose SiO4 tetrahedra are isolated and share no oxygen atoms, such as olivine."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Outcrop
+:Outcrop rdf:type owl:Class ;
+         rdfs:subClassOf :Locality ;
+         rdfs:comment "A natural surface exposure of rock where minerals can be observed in place."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Oxide
+:Oxide rdf:type owl:Class ;
+       rdfs:subClassOf :Mineral ;
+       rdfs:comment "A mineral formed by the combination of a metal with oxygen, such as hematite or corundum."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Phosphate
+:Phosphate rdf:type owl:Class ;
+           rdfs:subClassOf :Mineral ;
+           rdfs:comment "A mineral built on the phosphate (PO4) anion group, such as apatite."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Phyllosilicate
+:Phyllosilicate rdf:type owl:Class ;
+                rdfs:subClassOf :Silicate ;
+                rdfs:comment "A silicate whose SiO4 tetrahedra are arranged in sheets, such as mica."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Quarry
+:Quarry rdf:type owl:Class ;
+        rdfs:subClassOf :Locality ;
+        rdfs:comment "An open surface locality where rock or minerals are extracted."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Region
+:Region rdf:type owl:Class ;
+        rdfs:subClassOf :GeographicArea ;
+        rdfs:comment "A sub-national area (province or state) contained within a country."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/RockType
+:RockType rdf:type owl:Class ;
+          rdfs:comment "A type of rock that can host a mineral deposit."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/SedimentaryDeposit
+:SedimentaryDeposit rdf:type owl:Class ;
+                    rdfs:subClassOf :Deposit ;
+                    rdfs:comment "A deposit formed by the accumulation and concentration of minerals through sedimentary processes."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/SedimentaryRock
+:SedimentaryRock rdf:type owl:Class ;
+                 rdfs:subClassOf :RockType ;
+                 rdfs:comment "A rock formed from compacted and cemented sediments."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Silicate
+:Silicate rdf:type owl:Class ;
+          rdfs:subClassOf :Mineral ;
+          rdfs:comment "A mineral built on silicon-oxygen (SiO4) tetrahedra; the largest and most abundant mineral class."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Sulfate
+:Sulfate rdf:type owl:Class ;
+         rdfs:subClassOf :Mineral ;
+         rdfs:comment "A mineral built on the sulfate (SO4) anion group, such as gypsum."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Sulfide
+:Sulfide rdf:type owl:Class ;
+         rdfs:subClassOf :Mineral ;
+         rdfs:comment "A mineral in which one or more metals are combined with sulfur, such as pyrite or galena."@en .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Tectosilicate
+:Tectosilicate rdf:type owl:Class ;
+               rdfs:subClassOf :Silicate ;
+               rdfs:comment "A silicate whose SiO4 tetrahedra form a three-dimensional framework, such as quartz and feldspar."@en .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Adamantine
+:Adamantine rdf:type owl:NamedIndividual ,
+                     :LusterType .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Aluminimum
+:Aluminimum rdf:type owl:NamedIndividual ,
+                     :ChemicalElement ;
+            :atomicNumber 13 ;
+            :elementSymbol "Al" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Amethyst
+:Amethyst rdf:type owl:NamedIndividual ,
+                   :Tectosilicate ;
+          :composedOfElement :Oxygen ,
+                             :Silicon ;
+          :hasCleavageType :NoCleavage ;
+          :hasColorCategory :Colorless ;
+          :hasCrystalSystem :Trigonal ;
+          :hasLuster :Vitreous ;
+          :varietyOf :Quartz ;
+          :chemicalFormula "SiO2" ;
+          :density 2.65 ;
+          :mineralName "Amethyst" ;
+          :mohsHardness 7 .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Apatite
+:Apatite rdf:type owl:NamedIndividual ,
+                  :Phosphate ;
+         :composedOfElement :Calcium ,
+                            :Oxygen ,
+                            :Phosphorus ;
+         :hasCleavageType :NoCleavage ;
+         :hasColorCategory :Green ;
+         :hasCrystalSystem :Hexagonal ;
+         :hasLuster :Vitreous ;
+         :chemicalFormula "Ca5(PO4)3F" ;
+         :density 3.19 ;
+         :discoveryYear 1786 ;
+         :imaSymbol "Ap" ;
+         :mineralName "Apatite" ;
+         :mohsHardness 5 ;
+         :spaceGroup "P63/m" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Black
+:Black rdf:type owl:NamedIndividual ,
+                :ColorCategory .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Brazil
+:Brazil rdf:type owl:NamedIndividual ,
+                 :Country .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Calcite
+:Calcite rdf:type owl:NamedIndividual ,
+                  :Carbonate ;
+         :composedOfElement :Calcium ,
+                            :Carbon ,
+                            :Oxygen ;
+         :hasCleavageType :PerfectCleavage ;
+         :hasColorCategory :White ;
+         :hasCrystalSystem :Trigonal ;
+         :hasLuster :Vitreous ;
+         :hasTypeLocality :MinasOutcrop ;
+         :mineralOccursInCountry :Italy ;
+         :chemicalFormula "CaCO3" ;
+         :density 2.71 ;
+         :imaSymbol "Cal" ;
+         :mineralName "Calcite" ;
+         :mohsHardness 3 ;
+         :spaceGroup "R-3c" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Calcium
+:Calcium rdf:type owl:NamedIndividual ,
+                  :ChemicalElement ;
+         :atomicNumber 20 ;
+         :elementSymbol "Ca" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Carbon
+:Carbon rdf:type owl:NamedIndividual ,
+                 :ChemicalElement ;
+        :atomicNumber 6 ;
+        :elementSymbol "C" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/CarraraMarbleDeposit
+:CarraraMarbleDeposit rdf:type owl:NamedIndividual ,
+                               :MetamorphicDeposit ;
+                      :foundAtLocation :CarraraQuarry ;
+                      :hasMineral :Calcite ;
+                      :hostedByRock :Marble ;
+                      :depositName "Carrara" ;
+                      :formationAgeMa 27 .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/CarraraQuarry
+:CarraraQuarry rdf:type owl:NamedIndividual ,
+                        :Quarry ;
+               :locatedIn :Tuscany ;
+               :latitude 44.08 ;
+               :longitude 10.10 .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Chlorine
+:Chlorine rdf:type owl:NamedIndividual ,
+                   :ChemicalElement ;
+          :atomicNumber 17 ;
+          :elementSymbol "Cl" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Colorless
+:Colorless rdf:type owl:NamedIndividual ,
+                    :ColorCategory .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Croatia
+:Croatia rdf:type owl:NamedIndividual ,
+                  :Country .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Cubic
+:Cubic rdf:type owl:NamedIndividual ,
+                :CrystalSystem .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Diamond
+:Diamond rdf:type owl:NamedIndividual ,
+                  :NativeElement ;
+         :composedOfElement :Carbon ;
+         :hasCleavageType :PerfectCleavage ;
+         :hasColorCategory :Colorless ;
+         :hasCrystalSystem :Cubic ;
+         :hasLuster :Adamantine ;
+         :mineralOccursInCountry :Brazil ;
+         :polymorphOf :Graphite ;
+         :chemicalFormula "C" ;
+         :density 3.52 ;
+         :imaSymbol "Dia" ;
+         :mineralName "Diamond" ;
+         :mohsHardness 10 ;
+         :spaceGroup "Fd-3m" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Galena
+:Galena rdf:type owl:NamedIndividual ,
+                 :Sulfide ;
+        :coOccursWith :Pyrite ;
+        :composedOfElement :Lead ,
+                           :Sulfur ;
+        :hasCleavageType :PerfectCleavage ;
+        :hasColorCategory :Gray ;
+        :hasCrystalSystem :Cubic ;
+        :hasLuster :Metallic ;
+        :chemicalFormula "PbS" ;
+        :density 7.6 ;
+        :imaSymbol "Gn" ;
+        :mineralName "Galena" ;
+        :mohsHardness 2.5 ;
+        :spaceGroup "Fm-3m" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Golden
+:Golden rdf:type owl:NamedIndividual ,
+                 :ColorCategory .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Granite
+:Granite rdf:type owl:NamedIndividual ,
+                  :IgneousRock .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Graphite
+:Graphite rdf:type owl:NamedIndividual ,
+                   :NativeElement ;
+          :composedOfElement :Carbon ;
+          :hasCleavageType :PerfectCleavage ;
+          :hasColorCategory :Black ;
+          :hasCrystalSystem :Hexagonal ;
+          :hasLuster :Metallic ;
+          :chemicalFormula "C" ;
+          :density 2.23 ;
+          :discoveryYear 1789 ;
+          :imaSymbol "Gr" ;
+          :mineralName "Graphite" ;
+          :mohsHardness 1.5 ;
+          :spaceGroup "P63/mmc" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Gray
+:Gray rdf:type owl:NamedIndividual ,
+               :ColorCategory .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Green
+:Green rdf:type owl:NamedIndividual ,
+                :ColorCategory .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Gypsum
+:Gypsum rdf:type owl:NamedIndividual ,
+                 :Sulfate ;
+        :composedOfElement :Calcium ,
+                           :Oxygen ,
+                           :Sulfur ;
+        :hasCleavageType :PerfectCleavage ;
+        :hasColorCategory :White ;
+        :hasCrystalSystem :Monoclinic ;
+        :hasLuster :Pearly ;
+        :chemicalFormula "CaSO4.2H2O" ;
+        :density 2.31 ;
+        :imaSymbol "Gp" ;
+        :mineralName "Gypsum" ;
+        :mohsHardness 2 ;
+        :spaceGroup "I2/a" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Halite
+:Halite rdf:type owl:NamedIndividual ,
+                 :Halide ;
+        :composedOfElement :Chlorine ,
+                           :Sodium ;
+        :hasCleavageType :PerfectCleavage ;
+        :hasColorCategory :Colorless ;
+        :hasCrystalSystem :Cubic ;
+        :hasLuster :Vitreous ;
+        :chemicalFormula "NaCl" ;
+        :density 2.17 ;
+        :imaSymbol "Hl" ;
+        :mineralName "Halite" ;
+        :mohsHardness 2 ;
+        :spaceGroup "Fm-3m" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Hematite
+:Hematite rdf:type owl:NamedIndividual ,
+                   :Oxide ;
+          :coOccursWith :Quartz ;
+          :composedOfElement :Iron ,
+                             :Oxygen ;
+          :hasCleavageType :NoCleavage ;
+          :hasColorCategory :Red ;
+          :hasCrystalSystem :Trigonal ;
+          :hasLuster :Metallic ;
+          :hasTypeLocality :MinasOutcrop ;
+          :occursInDeposit :OuroPretoGoldDeposit ;
+          :chemicalFormula "Fe2O3" ;
+          :density 5.26 ;
+          :imaSymbol "Hem" ;
+          :mineralName "Hematite" ;
+          :mohsHardness 6 ;
+          :spaceGroup "R-3c" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Hexagonal
+:Hexagonal rdf:type owl:NamedIndividual ,
+                    :CrystalSystem .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Iron
+:Iron rdf:type owl:NamedIndividual ,
+               :ChemicalElement ;
+      :atomicNumber 26 ;
+      :elementSymbol "Fe" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Istria
+:Istria rdf:type owl:NamedIndividual ,
+                 :Region ;
+        :locatedIn :Croatia .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/IstrianStoneDeposit
+:IstrianStoneDeposit rdf:type owl:NamedIndividual ,
+                              :SedimentaryDeposit ;
+                     :foundAtLocation :VinkuranQuarry ;
+                     :hasMineral :Calcite ;
+                     :hostedByRock :Limestone ;
+                     :depositName "Vinkuran Limestone Deposit" ;
+                     :formationAgeMa 100 .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Italy
+:Italy rdf:type owl:NamedIndividual ,
+                :Country .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Lead
+:Lead rdf:type owl:NamedIndividual ,
+               :ChemicalElement ;
+      :atomicNumber 82 ;
+      :elementSymbol "Pb" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Limestone
+:Limestone rdf:type owl:NamedIndividual ,
+                    :IgneousRock .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Magnesium
+:Magnesium rdf:type owl:NamedIndividual ,
+                    :ChemicalElement ;
+           :atomicNumber 12 ;
+           :elementSymbol "Mg" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Magnetite
+:Magnetite rdf:type owl:NamedIndividual ,
+                    :Oxide ;
+           :composedOfElement :Iron ,
+                              :Oxygen ;
+           :hasCleavageType :NoCleavage ;
+           :hasColorCategory :Black ;
+           :hasCrystalSystem :Cubic ;
+           :hasLuster :Metallic ;
+           :chemicalFormula "Fe3O4" ;
+           :density 5.15 ;
+           :imaSymbol "Mag" ;
+           :mineralName "Magnetite" ;
+           :mohsHardness 6 ;
+           :spaceGroup "Fd-3m" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Marble
+:Marble rdf:type owl:NamedIndividual ,
+                 :IgneousRock .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Metallic
+:Metallic rdf:type owl:NamedIndividual ,
+                   :LusterType .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/MinasDiamondDeposit
+:MinasDiamondDeposit rdf:type owl:NamedIndividual ,
+                              :MagmaticDeposit ;
+                     :foundAtLocation :MinasOutcrop ;
+                     :hasGangueMineral :Olivine ;
+                     :hasOreMineral :Diamond ;
+                     :hostedByRock :Granite ;
+                     :depositName "Minas Kimberlite" ;
+                     :formationAgeMa 90 ;
+                     :oreGrade 0.0005 .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/MinasGerais
+:MinasGerais rdf:type owl:NamedIndividual ,
+                      :Region ;
+             :locatedIn :Brazil .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/MinasOutcrop
+:MinasOutcrop rdf:type owl:NamedIndividual ,
+                       :Outcrop ;
+              :locatedIn :MinasGerais ;
+              :latitude -19.90 ;
+              :longitude -43.94 .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Monoclinic
+:Monoclinic rdf:type owl:NamedIndividual ,
+                     :CrystalSystem .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Muscovite
+:Muscovite rdf:type owl:NamedIndividual ,
+                    :Phyllosilicate ;
+           :composedOfElement :Aluminimum ,
+                              :Oxygen ,
+                              :Potassium ,
+                              :Silicon ;
+           :hasCleavageType :PerfectCleavage ;
+           :hasColorCategory :Colorless ;
+           :hasCrystalSystem :Monoclinic ;
+           :hasLuster :Pearly ;
+           :chemicalFormula "KAl2(AlSi3O10)(OH)2" ;
+           :density 2.82 ;
+           :discoveryYear 1850 ;
+           :imaSymbol "Ms" ;
+           :mineralName "Muscovite" ;
+           :mohsHardness 2.5 ;
+           :spaceGroup "C2/c" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/NoCleavage
+:NoCleavage rdf:type owl:NamedIndividual ,
+                     :CleavageType .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Olivine
+:Olivine rdf:type owl:NamedIndividual ,
+                  :Nesosilicate ;
+         :composedOfElement :Iron ,
+                            :Magnesium ,
+                            :Oxygen ,
+                            :Silicon ;
+         :hasCleavageType :NoCleavage ;
+         :hasColorCategory :Green ;
+         :hasCrystalSystem :Orthorhombic ;
+         :hasLuster :Vitreous ;
+         :chemicalFormula "(Mg,Fe)2SiO4" ;
+         :density 3.32 ;
+         :discoveryYear 1789 ;
+         :imaSymbol "Ol" ;
+         :mineralName "Olivine" ;
+         :mohsHardness 6.75 ;
+         :spaceGroup "Pbnm" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Orthoclase
+:Orthoclase rdf:type owl:NamedIndividual ,
+                     :Tectosilicate ;
+            :composedOfElement :Aluminimum ,
+                               :Oxygen ,
+                               :Potassium ,
+                               :Silicon ;
+            :hasCleavageType :PerfectCleavage ;
+            :hasColorCategory :White ;
+            :hasCrystalSystem :Monoclinic ;
+            :hasLuster :Vitreous ;
+            :chemicalFormula "KAlSi3O8" ;
+            :density 2.56 ;
+            :discoveryYear 1823 ;
+            :imaSymbol "Or" ;
+            :mineralName "Orthoclase" ;
+            :mohsHardness 6 ;
+            :spaceGroup "C2/m" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Orthorhombic
+:Orthorhombic rdf:type owl:NamedIndividual ,
+                       :CrystalSystem .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/OuroPretoGoldDeposit
+:OuroPretoGoldDeposit rdf:type owl:NamedIndividual ,
+                               :HydrothermalDeposit ;
+                      :foundAtLocation :OuroPretoGoldMine ;
+                      :hasGangueMineral :Quartz ;
+                      :hasOreMineral :Pyrite ;
+                      :hostedByRock :Granite ;
+                      :depositName "Ourio Preto" ;
+                      :formationAgeMa 2000 ;
+                      :oreGrade 0.001 .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/OuroPretoGoldMine
+:OuroPretoGoldMine rdf:type owl:NamedIndividual ,
+                            :Mine ;
+                   :locatedIn :MinasGerais ;
+                   :latitude -20.39 ;
+                   :longitude -43.51 .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Oxygen
+:Oxygen rdf:type owl:NamedIndividual ,
+                 :ChemicalElement ;
+        :atomicNumber 8 ;
+        :elementSymbol "O" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Pearly
+:Pearly rdf:type owl:NamedIndividual ,
+                 :LusterType .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/PerfectCleavage
+:PerfectCleavage rdf:type owl:NamedIndividual ,
+                          :CleavageType .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Phosphorus
+:Phosphorus rdf:type owl:NamedIndividual ,
+                     :ChemicalElement ;
+            :atomicNumber 15 ;
+            :elementSymbol "P" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Potassium
+:Potassium rdf:type owl:NamedIndividual ,
+                    :ChemicalElement ;
+           :atomicNumber 19 ;
+           :elementSymbol "K" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Purple
+:Purple rdf:type owl:NamedIndividual ,
+                 :ColorCategory .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Pyrite
+:Pyrite rdf:type owl:NamedIndividual ,
+                 :Sulfide ;
+        :composedOfElement :Iron ,
+                           :Sulfur ;
+        :hasCleavageType :NoCleavage ;
+        :hasColorCategory :Golden ;
+        :hasCrystalSystem :Cubic ;
+        :hasLuster :Metallic ;
+        :chemicalFormula "FeS2" ;
+        :density 5.01 ;
+        :imaSymbol "Py" ;
+        :mineralName "Pyrite" ;
+        :mohsHardness 6.25 ;
+        :spaceGroup "Pa-3" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Quartz
+:Quartz rdf:type owl:NamedIndividual ,
+                 :Tectosilicate ;
+        :coOccursWith :Pyrite ;
+        :composedOfElement :Oxygen ,
+                           :Silicon ;
+        :hasCleavageType :NoCleavage ;
+        :hasColorCategory :Colorless ;
+        :hasCrystalSystem :Trigonal ;
+        :hasLuster :Vitreous ;
+        :mineralOccursInCountry :Brazil ;
+        :chemicalFormula "SiO2" ;
+        :density 2.65 ;
+        :imaSymbol "Qz" ;
+        :mineralName "Quartz" ;
+        :mohsHardness 7 ;
+        :spaceGroup "P3221" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Red
+:Red rdf:type owl:NamedIndividual ,
+              :ColorCategory .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/SaltLakeDeposit
+:SaltLakeDeposit rdf:type owl:NamedIndividual ,
+                          :SedimentaryDeposit ;
+                 :hasOreMineral :Halite ;
+                 :hostedByRock :Limestone ;
+                 :depositName "Salt Lake" ;
+                 :formationAgeMa 5 ;
+                 :oreGrade 95 .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Silicon
+:Silicon rdf:type owl:NamedIndividual ,
+                  :ChemicalElement ;
+         :atomicNumber 14 ;
+         :elementSymbol "Si" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Sodium
+:Sodium rdf:type owl:NamedIndividual ,
+                 :ChemicalElement ;
+        :atomicNumber 11 ;
+        :elementSymbol "Na" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Sulfur
+:Sulfur rdf:type owl:NamedIndividual ,
+                 :ChemicalElement ;
+        :atomicNumber 16 ;
+        :elementSymbol "S" .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Trigonal
+:Trigonal rdf:type owl:NamedIndividual ,
+                   :CrystalSystem .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Tuscany
+:Tuscany rdf:type owl:NamedIndividual ,
+                  :Region ;
+         :locatedIn :Italy .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/VinkuranQuarry
+:VinkuranQuarry rdf:type owl:NamedIndividual ,
+                         :Quarry ;
+                :locatedIn :Istria ;
+                :latitude 44.82 ;
+                :longitude 13.87 .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/Vitreous
+:Vitreous rdf:type owl:NamedIndividual ,
+                   :LusterType .
+
+
+###  http://www.semanticweb.org/reotu/ontologies/2026/6/mineralv1/White
+:White rdf:type owl:NamedIndividual ,
+                :ColorCategory .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Carbonate
+                :Halide
+                :NativeElement
+                :Oxide
+                :Phosphate
+                :Silicate
+                :Sulfate
+                :Sulfide
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :HydrothermalDeposit
+                :MagmaticDeposit
+                :MetamorphicDeposit
+                :SedimentaryDeposit
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :IgneousRock
+                :MetamorphicRock
+                :SedimentaryRock
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Mine
+                :Outcrop
+                :Quarry
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
